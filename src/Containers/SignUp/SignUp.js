@@ -13,7 +13,7 @@ import { compose } from 'recompose';
 const styles = (theme) => ({
   root: {
     width: 400,
-    margin: '50px auto',
+    margin: '100px auto',
     padding: theme.spacing.unit * 3
   },
   button: {
