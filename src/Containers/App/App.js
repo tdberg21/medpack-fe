@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {withRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 //Components
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
