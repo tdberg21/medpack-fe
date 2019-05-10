@@ -21,6 +21,7 @@ class CreatePatient extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmitForm}>
+        <button type="submit">Submit</button>
         </form>
       </div>
     );
