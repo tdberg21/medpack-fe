@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-class Login extends Component {
+class SignUp extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    
   };
 
   saveToState = event => {
@@ -14,9 +15,12 @@ class Login extends Component {
     });
   };
 
+  
+
   handleSubmitForm = event => {
     event.preventDefault();
-    // Send to back end for authentication...
+    // Check that email is unique
+    // Post to server
     this.setState({
       email: '',
       password: ''
@@ -48,13 +52,13 @@ class Login extends Component {
                 onChange={this.saveToState}
               />
             </label>
-            <button type="submit">Sign In!</button>
+            <button type="submit">Sign Up!</button>
           </fieldset>
         </form>
-        <NavLink to='/SignUp'>or signup</NavLink>
+        <NavLink to='/'>Login</NavLink>
       </div>
     );
   }
 }
 
-export default withRouter(Login);
+export default SignUp;
