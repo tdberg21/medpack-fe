@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import {withRouter, Route} from 'react-router-dom';
+//Components
 import Login from '../Login/Login';
+import SignUp from '../SignUp/SignUp';
 
 class App extends Component {
   render() {
@@ -9,7 +12,8 @@ class App extends Component {
         <header className="App-header">
           UAB-SM
         </header>
-        <Login />
+        <Route exact path='/' component={Login}/>
+        <Route path='/signup' component={SignUp}/>
       </div>
     );
   }
