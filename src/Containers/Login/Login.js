@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 
 class Login extends Component {
   state = {
     email: '',
-    username: '',
     password: ''
   };
 
@@ -51,9 +51,10 @@ class Login extends Component {
             <button type="submit">Sign In!</button>
           </fieldset>
         </form>
+        <NavLink to='/SignUp'>or signup</NavLink>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
