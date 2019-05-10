@@ -6,17 +6,23 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { rootReducer } from './Reducers/RootReducer/index'; 
+import { rootReducer } from './util/Reducers/RootReducer/index'; 
+import { MuiThemeProvider} from '@material-ui/core';
+import theme from './util/material-ui/theme';
+
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && 
                  window.__REDUX_DEVTOOLS_EXTENSION__();
 
 const store = createStore(rootReducer, devTools);
 
+
 ReactDOM.render(
 <Provider store={store}>
   <Router>
-    <App /> 
+    <MuiThemeProvider theme={theme}>
+      <App /> 
+    </MuiThemeProvider>
   </Router>
 </Provider>, 
 document.getElementById('root'));
