@@ -9,6 +9,7 @@ import {
   withStyles
 } from '@material-ui/core';
 import { compose } from 'recompose';
+import ArrowIcon from '@material-ui/icons/ChevronRight';
 
 const styles = (theme) => ({
   root: {
@@ -18,9 +19,13 @@ const styles = (theme) => ({
   },
   button: {
     margin: `${theme.spacing.unit * 2}px 0`,
+    display: 'flex',
+    alignItems: 'center'
   },
-  contrastText: {
-    color: theme.palette.primary.contrastText
+  buttonText: {
+    color: theme.palette.primary.contrastText,
+    letterSpacing: 0.5,
+    fontWeight: 700
   },
   form: {
     display: "flex",
@@ -73,6 +78,7 @@ class Login extends Component {
             label='Email'
             className={classes.textField}
             margin='normal'
+            color='secondary'
           />
           <TextField
             type="password"
@@ -82,6 +88,7 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.saveToState}
             margin='normal'
+            color='secondary'
           />
           <Button 
             type="submit" 
@@ -89,7 +96,8 @@ class Login extends Component {
             className={classes.button}
             color='primary'
           >
-            <Typography className={classes.contrastText} variant="subtitle1">Login</Typography>
+            <Typography className={classes.buttonText} variant="subtitle1">Login</Typography>
+            <ArrowIcon/>
           </Button>
       </form>
       <Divider/>
