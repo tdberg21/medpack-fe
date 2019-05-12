@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ScreenResultsForm from './ScreenResultsForm';
+import Login from './Login';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<ScreenResultsForm />, div);
+  ReactDOM.render(<Login />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
