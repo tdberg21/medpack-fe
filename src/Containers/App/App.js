@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Route} from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+// import { connect } from 'react-redux';
 //Components
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
@@ -19,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
