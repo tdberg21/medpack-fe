@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 // import { connect } from 'react-redux';
 //Components
 import Login from '../Login/Login';
@@ -13,8 +13,11 @@ class App extends Component {
         <header className="App-header">
           UAB-SM
         </header>
-        <Route exact path='/' component={Login}/>
-        <Route path='/signup' component={SignUp}/>
+        <Switch>
+          <Route exact path='/' component={Login}/>
+          <Route path='/signup' component={SignUp}/>
+          <Redirect to='/' />
+        </Switch>
       </div>
     );
   }
