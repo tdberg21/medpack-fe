@@ -4,10 +4,10 @@ import {
   InputBase,
   Toolbar,
   Typography,
-  withStyles
+  withStyles,
 } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@material-ui/icons/Search';
 
 const styles = theme => ({
   grow: {
@@ -51,17 +51,21 @@ const styles = theme => ({
     justifyContent: 'center',
   },
   toolBar: {
-    height: '100%'
-  }
-})
+    height: '100%',
+  },
+});
 
 const AppHeader = ({ classes }) => {
-
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position="static">
         <Toolbar className={classes.toolBar}>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            noWrap
+          >
             UAB-SM
           </Typography>
           <div className={classes.grow} />
@@ -80,7 +84,7 @@ const AppHeader = ({ classes }) => {
         </Toolbar>
       </AppBar>
     </div>
-  )
-}
+  );
+};
 
-export default withStyles(styles)(AppHeader)
+export default withStyles(styles)(AppHeader);
