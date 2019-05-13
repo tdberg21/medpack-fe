@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 class CreateAppointment extends Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   saveToState = event => {
     const { name, value } = event.target;
@@ -13,7 +16,6 @@ class CreateAppointment extends Component {
   handleSubmitForm = event => {
     event.preventDefault();
     this.setState({
-    
     }); 
   }
 

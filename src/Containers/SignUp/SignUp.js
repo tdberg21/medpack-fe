@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { 
   Button,
@@ -39,39 +39,26 @@ const styles = (theme) => ({
   }
 })
 
-class SignUp extends Component {
-  state = {
-    email: '',
-    password: ''
-  };
+const SignUp = ({ classes }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  saveToState = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleSubmitForm = event => {
+  const handleSubmitForm = event => {
     event.preventDefault();
     // Send to back end for authentication...
-    this.setState({
-      email: '',
-      password: ''
-    }); 
+    setEmail('');
+    setPassword('');
   }
 
-  render() {
-    const { classes } = this.props;
-    return (
+  return (
     <Paper className={classes.root}>
       <Typography variant="h5" className={classes.title}>Sign Up</Typography>
-      <form className={classes.form} onSubmit={this.handleSubmitForm}>
+      <form className={classes.form} onSubmit={handleSubmitForm}>
           <TextField
             type="email"
             name="email"  
-            value={this.state.email}
-            onChange={this.saveToState}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             variant='outlined'
             label='Email'
             className={classes.textField}
@@ -82,8 +69,8 @@ class SignUp extends Component {
             name="password"
             variant='outlined'
             label='Password'
-            value={this.state.password}
-            onChange={this.saveToState}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             margin='normal'
           />
           <Button 
@@ -103,8 +90,7 @@ class SignUp extends Component {
         </Button>
       </NavLink>
     </Paper>
-    );
-  }
+  );
 }
 
 export default compose(

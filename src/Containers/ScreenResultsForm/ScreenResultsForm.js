@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 class ScreenResultsForm extends Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   saveToState = event => {
     const { name, value } = event.target;
