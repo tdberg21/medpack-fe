@@ -12,6 +12,11 @@ const theme = createMuiTheme({
         textTransform: 'none',
       },
     },
+    MuiListItemIcon: {
+      root: {
+        color: 'inherit',
+      },
+    },
   },
   palette: {
     primary: {
