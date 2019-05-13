@@ -1,0 +1,91 @@
+import React, { Component } from 'react';
+import {
+  AppBar,
+  InputBase,
+  Toolbar,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
+import { fade } from '@material-ui/core/styles/colorManipulator';
+import SearchIcon from '@material-ui/icons/Search';
+
+const styles = theme => ({
+  root: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  inputRoot: {
+    color: 'inherit',
+    width: '100%',
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 140,
+      '&:focus': {
+        width: 220,
+      },
+    },
+  },
+  search: {
+    display: 'flex',
+    alignItems: 'vertical',
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 8,
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  toolBar: {
+    height: '100%',
+  },
+});
+
+const AppHeader = ({ classes }) => {
+  return (
+    <AppBar position="fixed" className={classes.root}>
+      <Toolbar className={classes.toolBar}>
+        <Typography
+          className={classes.title}
+          variant="h6"
+          color="inherit"
+          noWrap
+        >
+          UAB-SM
+        </Typography>
+        <div className={classes.grow} />
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Patient Search..."
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default withStyles(styles)(AppHeader);

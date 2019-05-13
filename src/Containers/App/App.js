@@ -5,18 +5,17 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 //Components
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
+import View from '../../Components/View/View';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          UAB-SM
-        </header>
         <Switch>
-          <Route exact path='/' component={Login}/>
-          <Route path='/signup' component={SignUp}/>
-          <Redirect to='/' />
+          <Route exact path="/" component={Login} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/app" component={View} />
+          <Redirect to="/" />
         </Switch>
       </div>
     );
