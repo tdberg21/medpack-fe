@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Drawer,
   Divider,
@@ -22,6 +23,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
   },
+  appBar: theme.overrides.MuiAppBar.root,
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -33,7 +35,11 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
-  appBar: theme.overrides.MuiAppBar.root,
+  listItem: {
+    '&:hover': {
+      color: theme.palette.secondary.main,
+    },
+  },
 });
 
 const LeftDrawer = ({ classes }) => {
@@ -68,16 +74,16 @@ const LeftDrawer = ({ classes }) => {
             'Patients',
             'Screening Results',
           ].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} className={classes.listItem}>
               <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text} className={classes.listItemText} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
           {['Add Appointment', 'Add Patient'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} className={classes.listItem}>
               <ListItemIcon>{navigationAppointments[index]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -86,6 +92,10 @@ const LeftDrawer = ({ classes }) => {
       </Drawer>
     </div>
   );
+};
+
+LeftDrawer.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(LeftDrawer);
