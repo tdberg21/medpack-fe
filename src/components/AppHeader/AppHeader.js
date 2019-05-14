@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   root: {
@@ -86,6 +87,10 @@ const AppHeader = ({ classes }) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+AppHeader.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(AppHeader);
