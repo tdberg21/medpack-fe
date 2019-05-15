@@ -57,40 +57,38 @@ const LeftDrawer = ({ classes }) => {
   ];
 
   return (
-    <div className={classes.root}>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.appBar} />
-        <List>
-          {[
-            'Home',
-            'Calendar',
-            'Appointments',
-            'Patients',
-            'Screening Results',
-          ].map((text, index) => (
-            <ListItem button key={text} className={classes.listItem}>
-              <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
-              <ListItemText primary={text} className={classes.listItemText} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Add Appointment', 'Add Patient'].map((text, index) => (
-            <ListItem button key={text} className={classes.listItem}>
-              <ListItemIcon>{navigationAppointments[index]}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </div>
+    <Drawer
+      className={classes.drawer}
+      variant="permanent"
+      classes={{
+        paper: classes.drawerPaper,
+      }}
+    >
+      <div className={classes.appBar} />
+      <List>
+        {[
+          'Home',
+          'Calendar',
+          'Appointments',
+          'Patients',
+          'Screening Results',
+        ].map((text, index) => (
+          <ListItem button key={text} className={classes.listItem}>
+            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
+            <ListItemText primary={text} className={classes.listItemText} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['Add Appointment', 'Add Patient'].map((text, index) => (
+          <ListItem button key={text} className={classes.listItem}>
+            <ListItemIcon>{navigationAppointments[index]}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
   );
 };
 
