@@ -16,12 +16,17 @@ import PatientsIcon from '@material-ui/icons/AssignmentInd';
 import ScreeningIcon from '@material-ui/icons/Assessment';
 import MakeAppointmentIcon from '@material-ui/icons/SupervisedUserCircle';
 import MakePatientIcon from '@material-ui/icons/AccountCircle';
+import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     display: 'flex',
+  },
+  active: {
+    color: theme.palette.secondary.main,
+    backgroundColor: '#fdfdfd',
   },
   appBar: theme.overrides.MuiAppBar.root,
   drawer: {
@@ -35,6 +40,10 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  link: {
+    textDecoration: 'none',
+    color: 'initial',
+  },
   listItem: {
     '&:hover': {
       color: theme.palette.secondary.main,
@@ -43,18 +52,73 @@ const styles = theme => ({
 });
 
 const LeftDrawer = ({ classes }) => {
-  const navigationIcons = [
-    <HomeIcon key="icon" />,
-    <CalendarIcon key="icon" />,
-    <AppointmentIcon key="icon" />,
-    <PatientsIcon key="icon" />,
-    <ScreeningIcon key="icon" />,
-  ];
+  const createNavOptions = () => {
+    const navigationIcons = [
+      <HomeIcon key="icon" />,
+      <CalendarIcon key="icon" />,
+      <AppointmentIcon key="icon" />,
+      <PatientsIcon key="icon" />,
+      <ScreeningIcon key="icon" />,
+    ];
 
-  const navigationAppointments = [
-    <MakeAppointmentIcon key="icon" />,
-    <MakePatientIcon key="icon" />,
-  ];
+    const navOptions = [
+      { text: 'Home', route: '' },
+      { text: 'Calendar', route: '/calendar' },
+      { text: 'Appointments', route: '/appointments' },
+      { text: 'Patients', route: '/patients' },
+      { text: 'Screening Results', route: '/screeningResults' },
+    ];
+
+    return navOptions.map((option, index) => {
+      return (
+        <NavLink
+          className={classes.link}
+          to={`/app${option.route}`}
+          key={option.text}
+          activeClassName={classes.active}
+        >
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
+            <ListItemText
+              primary={option.text}
+              className={classes.listItemText}
+            />
+          </ListItem>
+        </NavLink>
+      );
+    });
+  };
+
+  const createAppointmentOptions = () => {
+    const navigationIcons = [
+      <MakeAppointmentIcon key="icon" />,
+      <MakePatientIcon key="icon" />,
+    ];
+
+    const navOptions = [
+      { text: 'Add Appointment', route: '/addAppointment' },
+      { text: 'Add Patient', route: '/addPatient' },
+    ];
+
+    return navOptions.map((option, index) => {
+      return (
+        <NavLink
+          className={classes.link}
+          to={`/app${option.route}`}
+          key={option.text}
+          activeClassName={classes.active}
+        >
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
+            <ListItemText
+              primary={option.text}
+              className={classes.listItemText}
+            />
+          </ListItem>
+        </NavLink>
+      );
+    });
+  };
 
   return (
     <Drawer
@@ -65,29 +129,9 @@ const LeftDrawer = ({ classes }) => {
       }}
     >
       <div className={classes.appBar} />
-      <List>
-        {[
-          'Home',
-          'Calendar',
-          'Appointments',
-          'Patients',
-          'Screening Results',
-        ].map((text, index) => (
-          <ListItem button key={text} className={classes.listItem}>
-            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
-            <ListItemText primary={text} className={classes.listItemText} />
-          </ListItem>
-        ))}
-      </List>
+      <List>{createNavOptions()}</List>
       <Divider />
-      <List>
-        {['Add Appointment', 'Add Patient'].map((text, index) => (
-          <ListItem button key={text} className={classes.listItem}>
-            <ListItemIcon>{navigationAppointments[index]}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <List>{createAppointmentOptions()}</List>
     </Drawer>
   );
 };
