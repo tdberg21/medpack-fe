@@ -32,11 +32,14 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  header: {
+    margin: `${theme.spacing.unit * 4}px 0`,
+  },
   navLink: {
     margin: `${theme.spacing.unit}px 0`,
   },
   title: {
-    margin: '5px 0',
+    margin: `${theme.spacing.unit}px 0`,
   },
 });
 
@@ -52,47 +55,52 @@ const SignUp = ({ classes }) => {
   };
 
   return (
-    <Paper className={classes.root}>
-      <Typography variant="h5" className={classes.title}>
-        Sign Up
+    <>
+      <Typography variant="h2" className={classes.header}>
+        Welcome to UAB-SM
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmitForm}>
-        <TextField
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          variant="outlined"
-          label="Email"
-          className={classes.textField}
-          margin="normal"
-        />
-        <TextField
-          type="password"
-          name="password"
-          variant="outlined"
-          label="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          margin="normal"
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          className={classes.button}
-          color="primary"
-        >
-          <Typography className={classes.buttonText} variant="subtitle1">
-            Sign Up
-          </Typography>
-          <ArrowIcon />
-        </Button>
-      </form>
-      <Divider />
-      <NavLink to="/">
-        <Button className={classes.navLink}>or Login</Button>
-      </NavLink>
-    </Paper>
+      <Paper className={classes.root}>
+        <Typography variant="h5" className={classes.title}>
+          Sign Up
+        </Typography>
+        <form className={classes.form} onSubmit={handleSubmitForm}>
+          <TextField
+            type="email"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            variant="outlined"
+            label="Email"
+            className={classes.textField}
+            margin="normal"
+          />
+          <TextField
+            type="password"
+            name="password"
+            variant="outlined"
+            label="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            margin="normal"
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.button}
+            color="primary"
+          >
+            <Typography className={classes.buttonText} variant="subtitle1">
+              Sign Up
+            </Typography>
+            <ArrowIcon />
+          </Button>
+        </form>
+        <Divider />
+        <NavLink to="/">
+          <Button className={classes.navLink}>or Login</Button>
+        </NavLink>
+      </Paper>
+    </>
   );
 };
 

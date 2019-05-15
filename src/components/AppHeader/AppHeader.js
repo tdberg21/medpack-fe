@@ -14,6 +14,9 @@ const styles = theme => ({
   root: {
     zIndex: theme.zIndex.drawer + 1,
   },
+  filler: {
+    height: theme.overrides.MuiAppBar.root.height,
+  },
   grow: {
     flexGrow: 1,
   },
@@ -61,31 +64,34 @@ const styles = theme => ({
 
 const AppHeader = ({ classes }) => {
   return (
-    <AppBar position="fixed" className={classes.root}>
-      <Toolbar className={classes.toolBar}>
-        <Typography
-          className={classes.title}
-          variant="h6"
-          color="inherit"
-          noWrap
-        >
-          UAB-SM
-        </Typography>
-        <div className={classes.grow} />
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
+    <>
+      <div className={classes.filler} />
+      <AppBar position="fixed" className={classes.root}>
+        <Toolbar className={classes.toolBar}>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            noWrap
+          >
+            UAB-SM
+          </Typography>
+          <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Patient Search..."
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
           </div>
-          <InputBase
-            placeholder="Patient Search..."
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-          />
-        </div>
-      </Toolbar>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 };
 
