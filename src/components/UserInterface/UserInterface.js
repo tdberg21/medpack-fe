@@ -1,7 +1,8 @@
-import React, { Children } from 'react';
-import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
+import PropTypes from 'prop-types';
 import { AppHeader, LeftDrawer } from '..';
 
 const styles = theme => ({
@@ -26,6 +27,11 @@ const View = ({ classes, children }) => {
       </div>
     </>
   );
+};
+
+View.propTypes = {
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default compose(
