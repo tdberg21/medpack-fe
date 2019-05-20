@@ -9,21 +9,20 @@ class CreateAppointment extends Component {
   saveToState = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
   handleSubmitForm = event => {
     event.preventDefault();
-    this.setState({
-    }); 
-  }
+    this.setState({});
+  };
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmitForm}>
-        <button type="submit">Submit</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     );

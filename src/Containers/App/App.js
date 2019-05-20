@@ -3,9 +3,8 @@ import './App.css';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 // import { connect } from 'react-redux';
 //Components
-import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
-import View from '../../Components/View/View';
+import { View } from '../../Components';
+import { Login, SignUp } from '..';
 
 class App extends Component {
   render() {
