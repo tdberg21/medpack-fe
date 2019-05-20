@@ -53,69 +53,59 @@ const styles = theme => ({
 
 const LeftDrawer = ({ classes }) => {
   const createNavOptions = () => {
-    const navigationIcons = [
-      <HomeIcon key="icon" />,
-      <CalendarIcon key="icon" />,
-      <AppointmentIcon key="icon" />,
-      <PatientsIcon key="icon" />,
-      <ScreeningIcon key="icon" />,
-    ];
-
     const navOptions = [
-      { text: 'Home', route: '' },
-      { text: 'Calendar', route: '/calendar' },
-      { text: 'Appointments', route: '/appointments' },
-      { text: 'Patients', route: '/patients' },
-      { text: 'Screening Results', route: '/screeningResults' },
+      { text: 'Home', route: '', icon: <HomeIcon key="icon" /> },
+      {
+        text: 'Calendar',
+        route: '/calendar',
+        icon: <CalendarIcon key="icon" />,
+      },
+      {
+        text: 'Appointments',
+        route: '/appointments',
+        icon: <AppointmentIcon key="icon" />,
+      },
+      {
+        text: 'Patients',
+        route: '/patients',
+        icon: <PatientsIcon key="icon" />,
+      },
+      {
+        text: 'Screening Results',
+        route: '/screeningResults',
+        icon: <ScreeningIcon key="icon" />,
+      },
+      {
+        text: 'Add Appointment',
+        route: '/addAppointment',
+        icon: <MakeAppointmentIcon key="icon" />,
+      },
+      {
+        text: 'Add Patient',
+        route: '/addPatient',
+        icon: <MakePatientIcon key="icon" />,
+      },
     ];
 
     return navOptions.map((option, index) => {
       return (
-        <NavLink
-          className={classes.link}
-          to={`/app${option.route}`}
-          key={option.text}
-          activeClassName={classes.active}
-        >
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
-            <ListItemText
-              primary={option.text}
-              className={classes.listItemText}
-            />
-          </ListItem>
-        </NavLink>
-      );
-    });
-  };
-
-  const createAppointmentOptions = () => {
-    const navigationIcons = [
-      <MakeAppointmentIcon key="icon" />,
-      <MakePatientIcon key="icon" />,
-    ];
-
-    const navOptions = [
-      { text: 'Add Appointment', route: '/addAppointment' },
-      { text: 'Add Patient', route: '/addPatient' },
-    ];
-
-    return navOptions.map((option, index) => {
-      return (
-        <NavLink
-          className={classes.link}
-          to={`/app${option.route}`}
-          key={option.text}
-          activeClassName={classes.active}
-        >
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon>{navigationIcons[index]}</ListItemIcon>
-            <ListItemText
-              primary={option.text}
-              className={classes.listItemText}
-            />
-          </ListItem>
-        </NavLink>
+        <>
+          <NavLink
+            className={classes.link}
+            to={`/app${option.route}`}
+            key={option.text}
+            activeClassName={classes.active}
+          >
+            <ListItem button className={classes.listItem}>
+              <ListItemIcon>{option.icon}</ListItemIcon>
+              <ListItemText
+                primary={option.text}
+                className={classes.listItemText}
+              />
+            </ListItem>
+          </NavLink>
+          {index === 4 && <Divider />}
+        </>
       );
     });
   };
@@ -130,8 +120,6 @@ const LeftDrawer = ({ classes }) => {
     >
       <div className={classes.appBar} />
       <List>{createNavOptions()}</List>
-      <Divider />
-      <List>{createAppointmentOptions()}</List>
     </Drawer>
   );
 };
