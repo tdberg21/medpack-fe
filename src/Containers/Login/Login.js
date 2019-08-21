@@ -8,6 +8,8 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
+import { userLogin } from '../../util/Actions';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import ArrowIcon from '@material-ui/icons/ChevronRight';
 import PropTypes from 'prop-types';
@@ -33,26 +35,28 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   header: {
-    margin: `${theme.spacing.unit * 4}px 0`,
+    margin: `${theme.spacing.unit * 6}px 0`,
   },
   navLink: {
     margin: `${theme.spacing.unit}px 0`,
   },
-  textField: {},
   title: {
     margin: `${theme.spacing.unit}px 0`,
   },
 });
 
-const Login = ({ classes }) => {
+const Login = ({ classes, handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmitForm = event => {
     event.preventDefault();
     // Send to back end for authentication...
+    const newUser = { email, password };
+    handleLogin(newUser);
     setEmail('');
     setPassword('');
+    // handleLogin({ email });
   };
 
   return (
@@ -106,11 +110,20 @@ const Login = ({ classes }) => {
   );
 };
 
+const mapDispatchToProps = dispatch => ({
+  handleLogin: user => dispatch(userLogin(user)),
+});
+
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default compose(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
   withRouter,
   withStyles(styles)
 )(Login);
