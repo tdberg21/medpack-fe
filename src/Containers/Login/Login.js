@@ -9,6 +9,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { userLogin } from '../../util/Actions';
+import { userLoginPost } from '../../util/ApiCalls';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import ArrowIcon from '@material-ui/icons/ChevronRight';
@@ -68,14 +69,22 @@ const styles = theme => ({
   },
 });
 
-const Login = ({ classes, handleLogin }) => {
+const Login = ({ classes, handleLogin, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = event => {
+  const handleSubmitForm = async event => {
     event.preventDefault();
-    const newUser = { email, password };
-    handleLogin(newUser);
+    setErrorMessage('');
+    const newUser = { email, password, otp_code:'123732' };
+    const response = await userLoginPost(newUser);
+    if (response.error) {
+      setErrorMessage('Invalid Credentials.');
+    } else {
+      handleLogin(newUser);
+      history.push('/app/patients');
+    }
     setEmail('');
     setPassword('');
   };
@@ -91,6 +100,7 @@ const Login = ({ classes, handleLogin }) => {
         <Typography variant="h5" className={classes.title}>
           Login
         </Typography>
+        {errorMessage}
         <form className={classes.form} onSubmit={handleSubmitForm}>
           <TextField
             type="email"
