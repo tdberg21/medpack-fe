@@ -8,7 +8,7 @@ export const userLogin = async formData => {
   try {
     const response = await fetch('apiURL', {
       method: 'POST',
-      formData: JSON.stringify(formData),
+      body: JSON.stringify(formData),
       headers: headerInfoWithoutAuth,
     });
     const user = await response.json();
@@ -24,7 +24,7 @@ export const createUser = async formData => {
       'https://provider-minder.herokuapp.com/api/v1/user_create',
       {
         method: 'POST',
-        formData: JSON.stringify(formData),
+        body: JSON.stringify(formData),
         headers: headerInfoWithoutAuth,
       }
     );
