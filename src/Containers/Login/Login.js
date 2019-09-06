@@ -13,12 +13,19 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import ArrowIcon from '@material-ui/icons/ChevronRight';
 import PropTypes from 'prop-types';
+import backImage from '../../Assets/photo-1507925921958-8a62f3d1a50d.jpg';
 
 const styles = theme => ({
   root: {
     width: 400,
     margin: '100px auto',
     padding: theme.spacing.unit * 3,
+    backgroundColor: '#fffffff0',
+    zIndex: 2,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   button: {
     margin: `${theme.spacing.unit * 2}px 0`,
@@ -30,12 +37,28 @@ const styles = theme => ({
     letterSpacing: 0.5,
     fontWeight: 700,
   },
+  container: {
+    boxSizing: 'border-box',
+    minHeight: '100vh',
+    backgroundImage: `url('${backImage}')`,
+    backgroundSize: '100%',
+    backgroundRepeat: 'no-repeat',
+    filter: 'blur(4px)',
+    opacity: 0.75,
+  },
   form: {
     display: 'flex',
     flexDirection: 'column',
   },
   header: {
-    margin: `${theme.spacing.unit * 6}px 0`,
+    paddingTop: 64,
+    zIndex: 2,
+    position: 'absolute',
+    top: '10%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontWeight: 400,
+    fontFamily: `'Montserrat', sans-serif`,
   },
   navLink: {
     margin: `${theme.spacing.unit}px 0`,
@@ -51,20 +74,20 @@ const Login = ({ classes, handleLogin }) => {
 
   const handleSubmitForm = event => {
     event.preventDefault();
-    // Send to back end for authentication...
     const newUser = { email, password };
     handleLogin(newUser);
     setEmail('');
     setPassword('');
-    // handleLogin({ email });
   };
 
   return (
     <>
+      <div className={classes.container} />
       <Typography variant="h2" className={classes.header}>
-        Welcome to UAB-SM
+        Welcome to Provider Minder
       </Typography>
       <Paper className={classes.root}>
+        {/* <div className={classes.back}> */}
         <Typography variant="h5" className={classes.title}>
           Login
         </Typography>

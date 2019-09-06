@@ -74,7 +74,7 @@ const AppHeader = ({ classes }) => {
             color="inherit"
             noWrap
           >
-            UAB-SM
+            Provider Minder
           </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>
