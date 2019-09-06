@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Redirect, NavLink, withRouter } from 'react-router-dom';
 import {
   Button,
   Divider,
@@ -7,6 +7,9 @@ import {
   TextField,
   Typography,
   withStyles,
+  Dialog,
+  DialogTitle,
+  DialogActions,
 } from '@material-ui/core';
 import { userLogin } from '../../util/Actions';
 import { createUser } from '../../util/ApiCalls';
@@ -48,6 +51,14 @@ const styles = theme => ({
     filter: 'blur(4px)',
     opacity: 0.75,
   },
+  dialog: {},
+  dialogButton: {
+    width: '80%',
+    margin: '0 auto 16px auto',
+  },
+  dialogTitle: {
+    textAlign: 'center',
+  },
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -84,6 +95,8 @@ class SignUp extends Component {
       office_id: 1,
       role: 'default',
       status: 'active',
+      open: false,
+      dialogConfirmation: false,
     };
   }
 
@@ -96,16 +109,64 @@ class SignUp extends Component {
 
   handleSubmitForm = async event => {
     event.preventDefault();
-    const newUser = {
-      user: this.state,
-    };
-    console.log(newUser);
+    this.setState({ open: true });
+    const newUser = await this.returnUserInfo();
     const response = await createUser(newUser);
     console.log(response);
+    // if (response.message) {
+    //   this.setState({ open: true });
+    // }
+  };
+
+  handleDialog = () => {
+    this.setState({ dialogConfirmation: true });
+  };
+
+  returnUserInfo = () => {
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      password_confirmation,
+      phone_number,
+      office_id,
+      role,
+      status,
+    } = this.state;
+
+    const newUser = {
+      user: {
+        first_name,
+        last_name,
+        email,
+        password,
+        password_confirmation,
+        phone_number,
+        office_id,
+        role,
+        status,
+      },
+    };
+    return newUser;
   };
 
   render() {
     const { classes } = this.props;
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      password_confirmation,
+      phone_number,
+      open,
+    } = this.state;
+
+    if (this.state.dialogConfirmation === true) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <>
         <div className={classes.container} />
@@ -118,7 +179,7 @@ class SignUp extends Component {
             <TextField
               type="text"
               name="first_name"
-              value={this.state.first_name}
+              value={first_name}
               onChange={this.handleChange}
               variant="outlined"
               label="First Name"
@@ -129,7 +190,7 @@ class SignUp extends Component {
             <TextField
               type="text"
               name="last_name"
-              value={this.state.last_name}
+              value={last_name}
               onChange={this.handleChange}
               variant="outlined"
               label="Last Name"
@@ -140,7 +201,7 @@ class SignUp extends Component {
             <TextField
               type="text"
               name="phone_number"
-              value={this.state.phone_number}
+              value={phone_number}
               onChange={this.handleChange}
               variant="outlined"
               label="Phone Number"
@@ -151,7 +212,7 @@ class SignUp extends Component {
             <TextField
               type="email"
               name="email"
-              value={this.state.email}
+              value={email}
               onChange={this.handleChange}
               variant="outlined"
               label="Email"
@@ -164,7 +225,7 @@ class SignUp extends Component {
               name="password"
               variant="outlined"
               label="Password"
-              value={this.state.password}
+              value={password}
               onChange={this.handleChange}
               margin="normal"
               color="secondary"
@@ -174,7 +235,7 @@ class SignUp extends Component {
               name="password_confirmation"
               variant="outlined"
               label="Confirm password"
-              value={this.state.password_confirmation}
+              value={password_confirmation}
               onChange={this.handleChange}
               margin="normal"
               color="secondary"
@@ -196,6 +257,25 @@ class SignUp extends Component {
             <Button className={classes.navLink}>or Log In</Button>
           </NavLink>
         </Paper>
+        <Dialog open={open} className={classes.dialog}>
+          <DialogTitle className={classes.dialogTitle}>
+            <Typography variant="h6">
+              Thanks for signing up, check your email for your confirmation code
+              and one time password QR code to use with the Google Authenticator
+              app
+            </Typography>
+          </DialogTitle>
+          <DialogActions className={classes.dialogContent}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.dialogButton}
+              onClick={this.handleDialog}
+            >
+              Okay
+            </Button>
+          </DialogActions>
+        </Dialog>
       </>
     );
   }
