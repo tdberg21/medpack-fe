@@ -78,7 +78,8 @@ const Login = ({ classes, handleLogin, history }) => {
     event.preventDefault();
     setErrorMessage('');
     const newUser = { email, password, otp_code:'123732' };
-    const response = await userLoginPost(newUser);
+    let response = {};
+    // const response = await userLoginPost(newUser);
     if (response.error) {
       setErrorMessage('Invalid Credentials.');
     } else {
