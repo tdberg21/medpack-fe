@@ -9,6 +9,7 @@ import {
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 import PropTypes from 'prop-types';
+import logo from '../../Assets/logo.png';
 
 const styles = theme => ({
   root: {
@@ -74,7 +75,8 @@ const AppHeader = ({ classes }) => {
             color="inherit"
             noWrap
           >
-            Provider Minder
+            <img src={logo} alt="logo" height="50"></img>
+            {/* Provider Minder */}
           </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>

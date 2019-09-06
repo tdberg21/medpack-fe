@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
-import { Patients, UserInterface } from '..';
+import { Patients, UserInterface, Calendar } from '..';
 import { CreateAppointment, CreatePatient } from '../../Containers';
 
 const styles = theme => ({
@@ -24,7 +24,8 @@ const View = ({ classes }) => {
         <Route path="/app/patients" component={Patients} />
         <Route path="/app/addAppointment" component={CreateAppointment} />
         <Route path="/app/addPatient" component={CreatePatient} />
-        <Redirect to="/" />
+        <Route path="/app/Calendar" component={Calendar} />
+        <Redirect to="/app" />
       </Switch>
     </UserInterface>
   );
