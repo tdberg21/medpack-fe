@@ -4,9 +4,10 @@ export const headerInfoWithoutAuth = {
   'Access-Control-Allow-Headers': '*',
 };
 
-export const userLogin = async formData => {
+export const userLoginPost = async formData => {
+  console.log(formData);
   try {
-    const response = await fetch('apiURL', {
+    const response = await fetch('https://provider-minder.herokuapp.com/api/v1/authenticate', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: headerInfoWithoutAuth,
