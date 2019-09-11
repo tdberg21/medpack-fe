@@ -72,14 +72,14 @@ const styles = theme => ({
 const Login = ({ classes, handleLogin, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [otp_code, setOtp_code] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmitForm = async event => {
     event.preventDefault();
     setErrorMessage('');
-    const newUser = { email, password, otp_code:'123732' };
-    let response = {};
-    // const response = await userLoginPost(newUser);
+    const newUser = { email, password, otp_code };
+    const response = await userLoginPost(newUser);
     if (response.error) {
       setErrorMessage('Invalid Credentials.');
     } else {
@@ -120,6 +120,16 @@ const Login = ({ classes, handleLogin, history }) => {
             label="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            margin="normal"
+            color="secondary"
+          />
+          <TextField
+            type="text"
+            name="otp"
+            variant="outlined"
+            label="OTP Code"
+            value={password}
+            onChange={e => setOtp_code(e.target.value)}
             margin="normal"
             color="secondary"
           />
