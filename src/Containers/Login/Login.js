@@ -128,7 +128,7 @@ const Login = ({ classes, handleLogin, history }) => {
             name="otp"
             variant="outlined"
             label="OTP Code"
-            value={password}
+            value={otp_code}
             onChange={e => setOtp_code(e.target.value)}
             margin="normal"
             color="secondary"
