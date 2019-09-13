@@ -3,7 +3,7 @@ import './App.css';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 // import { connect } from 'react-redux';
 //Components
-import { View } from '../../Components';
+import { View, Success } from '../../Components';
 import { Login, SignUp } from '..';
 
 class App extends Component {
@@ -14,7 +14,8 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route path="/app" component={View} />
-          <Redirect to="/" />
+          <Route path="/success" component={Success} />
+          {/* <Redirect to="/" /> */}
         </Switch>
       </div>
     );
