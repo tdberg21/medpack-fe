@@ -36,14 +36,14 @@ export const createUser = async formData => {
   }
 };
 
-export const confirmUser = async formData => {
-  console.log(formData)
+export const confirmUser = async code => {
+  console.log(code)
   try {
     const response = await fetch(
-      'https://provider-minder.herokuapp.com/user_confirmations',
+      `https://provider-minder.herokuapp.com/user_confirmations/${code}/confirm_email`,
       {
-        method: 'POST',
-        body: JSON.stringify(formData),
+        method: 'GET',
+        // body: JSON.stringify(code),
         headers: headerInfoWithoutAuth,
       }
     );
