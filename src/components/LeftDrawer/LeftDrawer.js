@@ -56,8 +56,8 @@ const LeftDrawer = ({ classes }) => {
     const navOptions = [
       { text: 'Home', route: '', icon: <HomeIcon key="icon" /> },
       {
-        text: 'Calendar',
-        route: '/calendar',
+        text: 'Office',
+        route: '/Office',
         icon: <CalendarIcon key="icon" />,
       },
       {
