@@ -9,7 +9,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { userLogin } from '../../util/Actions';
-import { userLoginPost } from '../../util/ApiCalls';
+import { userLoginPost, confirmUser } from '../../util/ApiCalls';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import ArrowIcon from '@material-ui/icons/ChevronRight';
@@ -77,10 +77,9 @@ const Login = ({ classes, handleLogin, history }) => {
   
   const splitUrl = history.location.pathname.split('/user_confirmations/')[1];
   if (splitUrl) {
-    const token = splitUrl.split('/confirm')[0];
-    console.log(token);
-    // api call
-    history.push('/success');
+    console.log(splitUrl);
+    confirmUser(history.location.pathname);
+    // history.push('/success');
     console.log('success')
   }
   
