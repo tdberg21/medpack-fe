@@ -7,7 +7,7 @@ export const headerInfoWithoutAuth = {
 export const userLoginPost = async formData => {
   console.log(formData);
   try {
-    const response = await fetch('http://localhost:3001/api/v1/authenticate', {
+    const response = await fetch('https://provider-minder.herokuapp.com/api/v1/authenticate', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: headerInfoWithoutAuth,
@@ -22,7 +22,7 @@ export const userLoginPost = async formData => {
 export const createUser = async formData => {
   try {
     const response = await fetch(
-      'http://localhost:3001/api/v1/user_create',
+      'https://provider-minder.herokuapp.com/api/v1/user_create',
       {
         method: 'POST',
         body: JSON.stringify(formData),
@@ -40,7 +40,7 @@ export const confirmUser = async formData => {
   console.log(formData)
   try {
     const response = await fetch(
-      'http://localhost:3001/user_confirmations',
+      'https://provider-minder.herokuapp.com/user_confirmations',
       {
         method: 'POST',
         body: JSON.stringify(formData),
