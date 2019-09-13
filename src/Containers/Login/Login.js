@@ -75,15 +75,6 @@ const Login = ({ classes, handleLogin, history }) => {
   const [otp_code, setOtp_code] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   
-  const splitUrl = history.location.pathname.split('/user_confirmations/')[1];
-  if (splitUrl) {
-    console.log(splitUrl);
-    confirmUser(history.location.pathname);
-    // history.push('/success');
-    console.log('success')
-  }
-  
-
   const handleSubmitForm = async event => {
     event.preventDefault();
     setErrorMessage('');
