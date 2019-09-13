@@ -9,7 +9,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { userLogin } from '../../util/Actions';
-import { userLoginPost } from '../../util/ApiCalls';
+import { userLoginPost, confirmUser } from '../../util/ApiCalls';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import ArrowIcon from '@material-ui/icons/ChevronRight';
@@ -74,7 +74,7 @@ const Login = ({ classes, handleLogin, history }) => {
   const [password, setPassword] = useState('');
   const [otp_code, setOtp_code] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  
   const handleSubmitForm = async event => {
     event.preventDefault();
     setErrorMessage('');
@@ -89,6 +89,8 @@ const Login = ({ classes, handleLogin, history }) => {
     setEmail('');
     setPassword('');
   };
+
+  
 
   return (
     <>

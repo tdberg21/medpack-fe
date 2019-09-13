@@ -5,6 +5,7 @@ import PatientDetails from './PatientDetails/PatientDetails';
 import UserInterface from './UserInterface/UserInterface';
 import View from './View/View';
 import Calendar from './Calendar/Calendar';
+import Success from './Success/Success';
 
 export {
   AppHeader,
@@ -14,4 +15,6 @@ export {
   UserInterface,
   View,
   Calendar,
+  Success
 };
+
