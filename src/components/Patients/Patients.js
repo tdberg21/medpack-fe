@@ -12,7 +12,8 @@ import {
   TableBody,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { NavLink } from 'react-router-dom';
+import ViewIcon from '@material-ui/icons/ChevronRight';
+import { NavLink, Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {},
@@ -134,6 +135,11 @@ const Patients = ({ classes }) => {
           <TableCell>{birthday || '-'}</TableCell>
           <TableCell>{height || '-'}</TableCell>
           <TableCell>{weight || '-'}</TableCell>
+          <TableCell>
+            <Link to={`/app/patients/${id}`}>
+              <ViewIcon />
+            </Link>
+          </TableCell>
         </TableRow>
       );
     });
@@ -154,6 +160,7 @@ const Patients = ({ classes }) => {
               <TableCell>Birthday</TableCell>
               <TableCell>Weight (lbs)</TableCell>
               <TableCell>Height</TableCell>
+              <TableCell> View </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{generateTableRow()}</TableBody>

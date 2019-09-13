@@ -109,13 +109,12 @@ class SignUp extends Component {
 
   handleSubmitForm = async event => {
     event.preventDefault();
-    this.setState({ open: true });
+    // this.setState({ open: true });
     const newUser = await this.returnUserInfo();
     const response = await createUser(newUser);
-    console.log(response);
-    // if (response.message) {
-    //   this.setState({ open: true });
-    // }
+    if (response.message) {
+      this.setState({ open: true });
+    }
   };
 
   handleDialog = () => {
