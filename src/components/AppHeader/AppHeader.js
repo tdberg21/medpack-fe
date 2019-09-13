@@ -84,7 +84,7 @@ const AppHeader = ({ classes }) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Patient Search..."
+              placeholder="Search..."
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

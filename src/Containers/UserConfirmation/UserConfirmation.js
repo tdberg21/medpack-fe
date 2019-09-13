@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import { confirmUser } from '../../util/ApiCalls';
+import { AppHeader } from '..';
+import { NavLink } from 'react-router-dom';
+import {
+  Button,
+  Divider,
+  Paper,
+  TextField,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 
 
 class UserConfirmation extends Component {
@@ -16,7 +26,11 @@ class UserConfirmation extends Component {
 
     return (
       <div>
-        User Confirmation..
+        <AppHeader />
+        <p>Thank you for confirming your account. Please contact an administrator to activate your account.</p>
+        <NavLink to="/">
+          <Button>Click Here to Log In</Button>
+        </NavLink>
       </div>
     );
   }
