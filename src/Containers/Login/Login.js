@@ -86,6 +86,7 @@ const Login = ({ classes, handleLogin, history }) => {
       handleLogin(newUser);
       history.push('/app/patients');
     }
+    setPassword('');
   };
 
   return (
