@@ -84,7 +84,7 @@ const Login = ({ classes, handleLogin, history }) => {
       setErrorMessage('Invalid Credentials.');
     } else {
       handleLogin(newUser);
-      history.push('/app/patients');
+      history.push('/app');
     }
     setPassword('');
   };
