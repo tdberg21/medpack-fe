@@ -97,7 +97,8 @@ class CreateAppointment extends Component {
       office_id: this.props.userInfo.office_id,
       patient_id: parseInt(this.state.patient),
       start: `${this.state.date}T${this.state.time}`,
-      end: `${this.state.date}T${endTime}`
+      end: `${this.state.date}T${endTime}`,
+      url: `http://localhost:3000/app/appointment/${this.state.date}T${this.state.time}`
     };
     this.props.addEvents([eventData]);
   };
