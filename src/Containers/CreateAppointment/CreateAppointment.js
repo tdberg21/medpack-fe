@@ -5,6 +5,8 @@ import {
   Typography,
   TextField,
   Button,
+  MenuItem,
+  OutlinedInput,
   KeyboardTimePicker
 } from "@material-ui/core";
 import { createAppointment } from "../../util/ApiCalls";
@@ -29,6 +31,17 @@ const styles = theme => ({
   textField: {
     width: "240px"
   },
+  time: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 520
+  },
+  select: {
+    width: 120,
+    marginLeft: 15,
+    marginTop: 7
+  },
   title: {
     textAlign: "left"
   }
@@ -40,7 +53,8 @@ class CreateAppointment extends Component {
     this.state = {
       patient: "",
       date: "",
-      time: ""
+      time: "",
+      meridiem: ""
     };
   }
 
@@ -63,7 +77,7 @@ class CreateAppointment extends Component {
         office_id: this.props.userInfo.office_id,
         patient_id: parseInt(this.state.patient),
         user_id: 1,
-        start_time: `${this.state.date}T${this.state.time}`,
+        start_time: `${this.state.date}T${this.state.time}${this.state.meridiem}`,
         duration: 45
       }
     };
@@ -98,7 +112,7 @@ class CreateAppointment extends Component {
   };
 
   render() {
-    const { patient, date, time } = this.state;
+    const { patient, date, time, meridiem } = this.state;
     const { classes } = this.props;
     return (
       <>
@@ -128,17 +142,32 @@ class CreateAppointment extends Component {
               margin="normal"
               color="secondary"
             />
-            <TextField
-              type="text"
-              name="time"
-              value={time}
-              onChange={e => this.saveToState(e)}
-              variant="outlined"
-              label="Time"
-              className={classes.textField}
-              margin="normal"
-              color="secondary"
-            />
+            <div className={classes.time}>
+              <TextField
+                type="text"
+                name="time"
+                value={time}
+                onChange={e => this.saveToState(e)}
+                variant="outlined"
+                label="Time"
+                className={classes.textField}
+                margin="normal"
+                color="secondary"
+              />
+              <TextField
+                select
+                className={classes.select}
+                onChange={e => this.saveToState(e)}
+                name="meridiem"
+                value={meridiem}
+                variant="outlined"
+                input={<OutlinedInput name="meridiem" />}
+                label="Meridiem"
+              >
+                <MenuItem value="AM">AM</MenuItem>
+                <MenuItem value="PM">PM</MenuItem>
+              </TextField>
+            </div>
             <Button
               type="submit"
               variant="contained"

@@ -3,7 +3,14 @@ import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { compose } from "recompose";
-import { Home, Patients, PatientDetails, UserInterface, Calendar } from "..";
+import {
+  Appointment,
+  Home,
+  Patients,
+  PatientDetails,
+  UserInterface,
+  Calendar
+} from "..";
 import { CreateAppointment, CreatePatient } from "../../Containers";
 
 const styles = theme => ({
@@ -18,7 +25,7 @@ const styles = theme => ({
   }
 });
 
-const View = ({ classes, patients }) => {
+const View = ({ classes, events }) => {
   return (
     <UserInterface>
       <Switch>
@@ -26,6 +33,17 @@ const View = ({ classes, patients }) => {
         <Route path="/app/patients" component={Patients} />
         <Route path="/app/addAppointment" component={CreateAppointment} />
         <Route path="/app/addPatient" component={CreatePatient} />
+        <Route
+          path="/app/appointment/:id"
+          render={({ match }) => {
+            const { id } = match.params;
+            const matchingEvent = events.find(event => {
+              return event.start === id;
+            });
+            console.log(matchingEvent);
+            return <Appointment {...matchingEvent} />;
+          }}
+        />
         <Redirect to="/" />
       </Switch>
     </UserInterface>
@@ -33,7 +51,8 @@ const View = ({ classes, patients }) => {
 };
 
 const mapStateToProps = state => ({
-  patients: state.patients
+  patients: state.patients,
+  events: state.events
 });
 
 export default compose(
@@ -41,3 +60,14 @@ export default compose(
   withRouter,
   withStyles(styles)
 )(View);
+
+// <Route
+// path="/app/appointment/:id"
+// render={({ match }) => {
+//   const { id } = match.params;
+//   const match = events.find(
+//     event => event.start === parseInt(id)
+//   );
+//   return <Appointment{...jack} />;
+// }}
+// />

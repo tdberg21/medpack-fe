@@ -1,4 +1,5 @@
 import AppHeader from "./AppHeader/AppHeader";
+import Appointment from "./Appointment/Appointment";
 import LeftDrawer from "./LeftDrawer/LeftDrawer";
 import Home from "./Home/Home";
 import Calendar from "./Calendar/Calendar";
@@ -10,6 +11,7 @@ import Success from "./Success/Success";
 
 export {
   AppHeader,
+  Appointment,
   LeftDrawer,
   Home,
   Calendar,
