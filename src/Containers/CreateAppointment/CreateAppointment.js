@@ -71,7 +71,30 @@ class CreateAppointment extends Component {
       formData,
       this.props.userInfo.auth_token
     );
-    this.props.addEvents(formData.appointment);
+    console.log(`${this.state.date}T${this.state.time}`);
+    this.addEventToCalendar();
+    this.props.history.push("/app");
+  };
+
+  addEventToCalendar = () => {
+    const endTime = this.addDuration(this.state.time);
+    const eventData = {
+      appointment_result: "scheduled",
+      office_id: this.props.userInfo.office_id,
+      patient_id: parseInt(this.state.patient),
+      start: `${this.state.date}T${this.state.time}`,
+      end: `${this.state.date}T${endTime}`
+    };
+    this.props.addEvents([eventData]);
+  };
+
+  addDuration = time => {
+    const endTime = j => {
+      return (j < 10 ? "0" : "") + j;
+    };
+    const piece = time.split(":");
+    const mins = piece[0] * 60 + +piece[1] + +45;
+    return endTime(((mins % 1440) / 60) | 0) + ":" + endTime(mins % 60);
   };
 
   render() {
