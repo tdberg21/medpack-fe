@@ -75,12 +75,12 @@ const Login = ({ classes, handleLogin, history }) => {
   const [otp_code, setOtp_code] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  // const sessionUser = JSON.parse(sessionStorage.getItem("user"));
 
-  if (sessionUser) {
-    handleLogin(sessionUser);
-    history.push("/app");
-  }
+  // if (sessionUser) {
+  //   handleLogin(sessionUser);
+  //   history.push("/app");
+  // }
 
   const handleSubmitForm = async event => {
     event.preventDefault();
