@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 // import addEvents from "../../util/Actions";
+import eventCleaner from "../../util/Helpers/EventCleaner";
 import FullCalendar from "@fullcalendar/react";
 import { getAppointments } from "../../util/ApiCalls";
 import { addEvents } from "../../util/Actions/events/events";
@@ -12,30 +13,16 @@ import "./Calendar.scss";
 class Calendar extends Component {
   constructor() {
     super();
-    this.state = {
-      events: [
-        { title: "test appointment", date: "2019-09-27" },
-        { title: "test appointment", date: "2019-09-29" },
-        { title: "test appointment", date: "2019-10-22" },
-        {
-          title: "test appointment",
-          start: "2019-10-03T12:30",
-          end: "2019-10-03T13:30"
-        },
-        {
-          title: "test appointment",
-          start: "2019-10-03T14:00",
-          end: "2019-10-03T15:00"
-        }
-      ]
-    };
+    this.state = {};
   }
 
   async componentDidMount() {
     const { office_id, auth_token } = this.props.userInfo;
-    const response = await getAppointments(office_id, auth_token);
-    console.log(response);
-    // this.props.addEvents();
+    if (!this.props.events.length) {
+      const response = await getAppointments(office_id, auth_token);
+      const cleanedEvents = eventCleaner(response);
+      this.props.addEvents(cleanedEvents);
+    }
   }
 
   render() {
@@ -43,7 +30,7 @@ class Calendar extends Component {
       <FullCalendar
         defaultView="timeGridWeek"
         plugins={[timeGridPlugin]}
-        events={this.state.events}
+        events={this.props.events}
         weekends={false}
         minTime="07:00:00"
         maxTime="22:00:00"
