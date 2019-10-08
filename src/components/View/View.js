@@ -22,7 +22,7 @@ const View = ({ classes, patients }) => {
   return (
     <UserInterface>
       <Switch>
-        <Route exact path="/app" component={Home} />
+        <Route exact path="/app" component={Calendar} />
         <Route path="/app/patients" component={Patients} />
         <Route path="/app/addAppointment" component={CreateAppointment} />
         <Route path="/app/addPatient" component={CreatePatient} />

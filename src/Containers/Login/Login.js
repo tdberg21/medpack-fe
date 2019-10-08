@@ -1,92 +1,94 @@
-import React, { useState } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, withRouter } from "react-router-dom";
 import {
   Button,
   Divider,
   Paper,
   TextField,
   Typography,
-  withStyles,
-} from '@material-ui/core';
-import { userLogin } from '../../util/Actions';
-import { userLoginPost, confirmUser } from '../../util/ApiCalls';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import ArrowIcon from '@material-ui/icons/ChevronRight';
-import PropTypes from 'prop-types';
-import backImage from '../../Assets/photo-1507925921958-8a62f3d1a50d.jpg';
+  withStyles
+} from "@material-ui/core";
+import { userLogin } from "../../util/Actions";
+import { userLoginPost, confirmUser } from "../../util/ApiCalls";
+import { connect } from "react-redux";
+import { compose } from "recompose";
+import ArrowIcon from "@material-ui/icons/ChevronRight";
+import PropTypes from "prop-types";
+import backImage from "../../Assets/photo-1507925921958-8a62f3d1a50d.jpg";
 
 const styles = theme => ({
   root: {
     width: 400,
-    margin: '100px auto',
+    margin: "100px auto",
     padding: theme.spacing.unit * 3,
-    backgroundColor: '#fffffff0',
+    backgroundColor: "#fffffff0",
     zIndex: 2,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   },
   button: {
     margin: `${theme.spacing.unit * 2}px 0`,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center"
   },
   buttonText: {
     color: theme.palette.primary.contrastText,
     letterSpacing: 0.5,
-    fontWeight: 700,
+    fontWeight: 700
   },
   container: {
-    boxSizing: 'border-box',
-    minHeight: '100vh',
+    boxSizing: "border-box",
+    minHeight: "100vh",
     backgroundImage: `url('${backImage}')`,
-    backgroundSize: '100%',
-    backgroundRepeat: 'no-repeat',
-    filter: 'blur(4px)',
-    opacity: 0.75,
+    backgroundSize: "100%",
+    backgroundRepeat: "no-repeat",
+    filter: "blur(4px)",
+    opacity: 0.75
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column"
   },
   header: {
     paddingTop: 64,
     zIndex: 2,
-    position: 'absolute',
-    top: '10%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "10%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     fontWeight: 400,
-    fontFamily: `'Montserrat', sans-serif`,
+    fontFamily: `'Montserrat', sans-serif`
   },
   navLink: {
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing.unit}px 0`
   },
   title: {
-    margin: `${theme.spacing.unit}px 0`,
-  },
+    margin: `${theme.spacing.unit}px 0`
+  }
 });
 
 const Login = ({ classes, handleLogin, history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [otp_code, setOtp_code] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [otp_code, setOtp_code] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmitForm = async event => {
     event.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
     const newUser = { email, password, otp_code };
     const response = await userLoginPost(newUser);
     if (response.error) {
-      setErrorMessage('Invalid Credentials.');
+      console.log(response.error);
+      setErrorMessage("Invalid Credentials.");
     } else {
-      handleLogin(newUser);
-      history.push('/app');
+      handleLogin(response);
+      sessionStorage.setItem("user", JSON.stringify(response));
+      history.push("/app");
     }
-    setPassword('');
+    setPassword("");
   };
 
   return (
@@ -154,12 +156,12 @@ const Login = ({ classes, handleLogin, history }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleLogin: user => dispatch(userLogin(user)),
+  handleLogin: user => dispatch(userLogin(user))
 });
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleLogin: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired
 };
 
 export default compose(
