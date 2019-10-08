@@ -1,3 +1,4 @@
-import { userLogin, userLogout } from './user/user';
+import { userLogin, userLogout } from "./user/user";
+import { addEvents } from "./events/events";
 
-export { userLogin, userLogout };
+export { addEvents, userLogin, userLogout };
