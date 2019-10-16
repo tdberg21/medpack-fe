@@ -66,7 +66,7 @@ const styles = theme => ({
 });
 
 const AppHeader = ({ classes }) => {
-  handleChange = id => {
+  const handleChange = id => {
     this.props.patients.filter(patient => patient === id);
   };
 
