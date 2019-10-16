@@ -96,11 +96,12 @@ export const getPatients = async (token, officeID) => {
     const response = await fetch(
       `http://localhost:3001/api/v1/patients?office_id=${officeID}`,
       {
-        method: "POST",
+        method: "GET",
         headers: headerInfoWithAuth(token)
       }
     );
     const patients = await response.json();
+    console.log(officeID, patients);
   } catch (error) {
     throw error;
   }

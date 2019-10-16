@@ -22,7 +22,7 @@ class Calendar extends Component {
 
   async componentDidMount() {
     const { office_id, auth_token } = this.props.userInfo;
-    await this.addPatientsToStore(auth_token);
+    await this.addPatientsToStore(auth_token, office_id);
     if (!this.props.events.length) {
       const response = await getAppointments(office_id, auth_token);
       const cleanedEvents = eventCleaner(response);
@@ -30,10 +30,9 @@ class Calendar extends Component {
     }
   }
 
-  addPatientsToStore = async authToken => {
-    const response = await getPatients(authToken);
+  addPatientsToStore = async (authToken, officeId) => {
+    const response = await getPatients(authToken, officeId);
     console.log(response);
-
     // this.props.addPatients(response);
   };
 
