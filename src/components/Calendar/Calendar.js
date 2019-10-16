@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import { withRouter, Redirect } from "react-router-dom";
 import eventCleaner from "../../util/Helpers/EventCleaner";
 import FullCalendar from "@fullcalendar/react";
-import { getAppointments } from "../../util/ApiCalls";
+import { getAppointments, getPatients } from "../../util/ApiCalls";
 import { userLogin } from "../../util/Actions";
 import { addEvents } from "../../util/Actions/events/events";
+import { addPatients } from "../../util/Actions/patients/patients";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { connect } from "react-redux";
@@ -20,19 +21,21 @@ class Calendar extends Component {
   }
 
   async componentDidMount() {
-    // const user = await JSON.parse(sessionStorage.getItem("user"));
-    // if (user) {
-    //   this.props.handleLogin(user);
-    //   console.log(user, "hello");
-    // }
     const { office_id, auth_token } = this.props.userInfo;
+    await this.addPatientsToStore(auth_token);
     if (!this.props.events.length) {
       const response = await getAppointments(office_id, auth_token);
-      console.log(response);
       const cleanedEvents = eventCleaner(response);
       await this.props.addEvents(cleanedEvents);
     }
   }
+
+  addPatientsToStore = async authToken => {
+    const response = await getPatients(authToken);
+    console.log(response);
+
+    // this.props.addPatients(response);
+  };
 
   render() {
     return (
@@ -59,6 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  addPatients: patients => dispatch(addPatients(patients)),
   addEvents: events => dispatch(addEvents(events)),
   handleLogin: user => dispatch(userLogin(user))
 });

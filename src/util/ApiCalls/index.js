@@ -90,3 +90,18 @@ export const createAppointment = async (formData, token) => {
     throw error;
   }
 };
+
+export const getPatients = async (token, officeID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/v1/patients?office_id=${officeID}`,
+      {
+        method: "POST",
+        headers: headerInfoWithAuth(token)
+      }
+    );
+    const patients = await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
