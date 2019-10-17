@@ -1,7 +1,6 @@
 import React from "react";
 import {
   withStyles,
-  Card,
   Fab,
   Paper,
   Typography,

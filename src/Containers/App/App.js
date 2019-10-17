@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import "./App.css";
+import { Route, withRouter, Switch } from "react-router-dom";
 // import { connect } from 'react-redux';
 //Components
-import { View, Success } from '../../Components';
-import { Login, SignUp, UserConfirmation } from '..';
+import { View, Success } from "../../Components";
+import { Login, SignUp, UserConfirmation } from "..";
 
 class App extends Component {
   render() {

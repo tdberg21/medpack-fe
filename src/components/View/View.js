@@ -5,9 +5,8 @@ import { withStyles } from "@material-ui/core";
 import { compose } from "recompose";
 import {
   Appointment,
-  Home,
   Patients,
-  PatientDetails,
+  // PatientDetails,
   UserInterface,
   Calendar
 } from "..";

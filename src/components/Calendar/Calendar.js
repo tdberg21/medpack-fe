@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 // import addEvents from "../../util/Actions";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import eventCleaner from "../../util/Helpers/EventCleaner";
 import FullCalendar from "@fullcalendar/react";
 import { getAppointments, getPatients } from "../../util/ApiCalls";
@@ -9,7 +8,6 @@ import { userLogin } from "../../util/Actions";
 import { addEvents } from "../../util/Actions/events/events";
 import { addPatients } from "../../util/Actions/patients/patients";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import dayGridPlugin from "@fullcalendar/daygrid";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import "./Calendar.scss";

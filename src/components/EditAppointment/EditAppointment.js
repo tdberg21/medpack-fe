@@ -62,11 +62,11 @@ class EditAppointment extends Component {
     const { id, user } = this.props;
     const formData = {
       appointment: {
-        id,
         patient_id: this.state.patient_id
       }
     };
-    updateAppointment(user.auth_token, formData);
+    console.log(formData);
+    updateAppointment(user.auth_token, formData, id);
   };
 
   render() {
