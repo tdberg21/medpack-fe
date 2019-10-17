@@ -101,7 +101,25 @@ export const getPatients = async (token, officeID) => {
       }
     );
     const patients = await response.json();
+    return patients;
     console.log(officeID, patients);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateAppointment = async (token, formData) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/v1/appointment_update`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(formData),
+        headers: headerInfoWithAuth
+      }
+    );
+    const message = await response.json();
+    return message;
   } catch (error) {
     throw error;
   }
