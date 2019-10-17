@@ -1,5 +1,6 @@
 export default events => {
   return events.data.map(event => {
+    const { id } = event;
     const {
       appointment_result,
       office_id,
@@ -12,6 +13,7 @@ export default events => {
 
     return {
       appointment_result,
+      id,
       office_id,
       patient_id,
       url: `http://localhost:3000/app/appointment/${editTimes(

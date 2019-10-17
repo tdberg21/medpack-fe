@@ -8,6 +8,9 @@ import {
   Typography,
   withStyles
 } from "@material-ui/core";
+import { compose } from "recompose";
+import { connect } from "react-redux";
+import { updateAppointment } from "../../util/ApiCalls";
 
 const styles = theme => ({
   root: {},
@@ -51,8 +54,19 @@ class EditAppointment extends Component {
     });
   };
 
-  handleSubmit = () => {
-    // api call
+  handleSubmit = async () => {
+    // const stateKeys = ["start", "patient_id"];
+    // stateKeys.reduce( (acc, key) => {
+    //   if(this.state)
+    // }, {});
+    const { id, user } = this.props;
+    const formData = {
+      appointment: {
+        id,
+        patient_id: this.state.patient_id
+      }
+    };
+    updateAppointment(user.auth_token, formData);
   };
 
   render() {
@@ -118,4 +132,11 @@ class EditAppointment extends Component {
   }
 }
 
-export default withStyles(styles)(EditAppointment);
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(EditAppointment);

@@ -25,7 +25,7 @@ class Appointment extends Component {
 
   render() {
     console.log(this.props);
-    const { patient_id, office_id, start, classes } = this.props;
+    const { id, patient_id, office_id, start, classes } = this.props;
     return (
       <Paper className={classes.root}>
         <Typography className={classes.content}>
