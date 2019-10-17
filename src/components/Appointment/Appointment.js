@@ -42,6 +42,7 @@ class Appointment extends Component {
           patient_id={patient_id}
           start={start}
           office_id={office_id}
+          id={id}
         />
       </Paper>
     );
