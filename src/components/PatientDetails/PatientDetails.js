@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Paper } from '@material-ui/core';
+import React, { Component } from "react";
+// import {  } from '@material-ui/core';
 
 class PatientDetails extends Component {
   constructor() {
     super();
+    this.state = {};
   }
 
   render() {

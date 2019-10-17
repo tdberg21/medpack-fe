@@ -1,42 +1,32 @@
-import React, { Component } from 'react';
-import { confirmUser } from '../../util/ApiCalls';
-import { AppHeader } from '..';
-import { NavLink } from 'react-router-dom';
-import LogoImg from './../../Assets/logo.png';
-import {
-  Button,
-  Divider,
-  Paper,
-  TextField,
-  Typography,
-  withStyles,
-} from '@material-ui/core';
-import { compose } from 'recompose';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import LogoImg from "./../../Assets/logo.png";
+import { Button, Typography, withStyles } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
     width: 700,
     height: 600,
-    margin: '200px auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    margin: "200px auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   text: {
-    margin: `${theme.spacing.unit * 3}px 0`,
+    margin: `${theme.spacing.unit * 3}px 0`
   },
   img: {
     width: 200,
     height: 200,
-    borderRadius: 4,
+    borderRadius: 4
   },
   button: {
-    width: 225,
+    width: 225
   },
   buttonText: {
-    color: '#fff',
-  },
+    color: "#fff"
+  }
 });
 
 class Success extends Component {

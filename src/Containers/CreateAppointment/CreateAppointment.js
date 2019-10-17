@@ -6,8 +6,7 @@ import {
   TextField,
   Button,
   MenuItem,
-  OutlinedInput,
-  KeyboardTimePicker
+  OutlinedInput
 } from "@material-ui/core";
 import { createAppointment } from "../../util/ApiCalls";
 import { addEvents } from "../../util/Actions/events/events";
@@ -81,11 +80,7 @@ class CreateAppointment extends Component {
         duration: 45
       }
     };
-    const response = await createAppointment(
-      formData,
-      this.props.userInfo.auth_token
-    );
-    console.log(`${this.state.date}T${this.state.time}`);
+    await createAppointment(formData, this.props.userInfo.auth_token);
     this.addEventToCalendar();
     this.props.history.push("/app");
   };

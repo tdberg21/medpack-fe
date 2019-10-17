@@ -5,8 +5,7 @@ export default events => {
       appointment_result,
       office_id,
       patient_id,
-      time_slot,
-      attributes
+      time_slot
     } = event.attributes;
     const start = editTimes(time_slot.attributes.start_time);
     const end = editTimes(time_slot.attributes.end_time);

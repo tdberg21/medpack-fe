@@ -9,7 +9,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { userLogin } from "../../util/Actions";
-import { userLoginPost, confirmUser } from "../../util/ApiCalls";
+import { userLoginPost } from "../../util/ApiCalls";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import ArrowIcon from "@material-ui/icons/ChevronRight";

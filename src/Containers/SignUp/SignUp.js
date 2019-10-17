@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect, NavLink, withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { Redirect, NavLink, withRouter } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -9,76 +9,75 @@ import {
   withStyles,
   Dialog,
   DialogTitle,
-  DialogActions,
-} from '@material-ui/core';
-import { userLogin } from '../../util/Actions';
-import { createUser } from '../../util/ApiCalls';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import ArrowIcon from '@material-ui/icons/ChevronRight';
-import PropTypes from 'prop-types';
-import backImage from '../../Assets/photo-1507925921958-8a62f3d1a50d.jpg';
-import { resolve } from 'path';
+  DialogActions
+} from "@material-ui/core";
+import { userLogin } from "../../util/Actions";
+import { createUser } from "../../util/ApiCalls";
+import { connect } from "react-redux";
+import { compose } from "recompose";
+import ArrowIcon from "@material-ui/icons/ChevronRight";
+import PropTypes from "prop-types";
+import backImage from "../../Assets/photo-1507925921958-8a62f3d1a50d.jpg";
 
 const styles = theme => ({
   root: {
     width: 700,
-    margin: 'auto',
+    margin: "auto",
     padding: theme.spacing.unit * 3,
-    backgroundColor: '#fffffff0',
+    backgroundColor: "#fffffff0",
     zIndex: 2,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   },
   button: {
     margin: `${theme.spacing.unit * 2}px 0`,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center"
   },
   buttonText: {
     color: theme.palette.primary.contrastText,
     letterSpacing: 0.5,
-    fontWeight: 700,
+    fontWeight: 700
   },
   container: {
-    boxSizing: 'border-box',
-    minHeight: '100vh',
+    boxSizing: "border-box",
+    minHeight: "100vh",
     backgroundImage: `url('${backImage}')`,
-    backgroundSize: '100%',
-    backgroundRepeat: 'no-repeat',
-    filter: 'blur(4px)',
-    opacity: 0.75,
+    backgroundSize: "100%",
+    backgroundRepeat: "no-repeat",
+    filter: "blur(4px)",
+    opacity: 0.75
   },
   dialog: {},
   dialogButton: {
-    width: '80%',
-    margin: '0 auto 16px auto',
+    width: "80%",
+    margin: "0 auto 16px auto"
   },
   dialogTitle: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column"
   },
   header: {
     paddingTop: 64,
     zIndex: 2,
-    position: 'absolute',
-    top: '10%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "10%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     fontWeight: 400,
-    fontFamily: `'Montserrat', sans-serif`,
+    fontFamily: `'Montserrat', sans-serif`
   },
   navLink: {
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing.unit}px 0`
   },
   title: {
-    margin: `${theme.spacing.unit}px 0`,
-  },
+    margin: `${theme.spacing.unit}px 0`
+  }
 });
 
 class SignUp extends Component {
@@ -86,24 +85,24 @@ class SignUp extends Component {
     super();
 
     this.state = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
-      phone_number: '',
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      phone_number: "",
       office_id: 1,
-      role: 'default',
-      status: 'active',
+      role: "default",
+      status: "active",
       open: false,
-      dialogConfirmation: false,
+      dialogConfirmation: false
     };
   }
 
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -131,7 +130,7 @@ class SignUp extends Component {
       phone_number,
       office_id,
       role,
-      status,
+      status
     } = this.state;
 
     const newUser = {
@@ -144,8 +143,8 @@ class SignUp extends Component {
         phone_number,
         office_id,
         role,
-        status,
-      },
+        status
+      }
     };
     return newUser;
   };
@@ -159,7 +158,7 @@ class SignUp extends Component {
       password,
       password_confirmation,
       phone_number,
-      open,
+      open
     } = this.state;
 
     if (this.state.dialogConfirmation === true) {
@@ -281,12 +280,12 @@ class SignUp extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleLogin: user => dispatch(userLogin(user)),
+  handleLogin: user => dispatch(userLogin(user))
 });
 
 SignUp.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleLogin: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired
 };
 
 export default compose(
