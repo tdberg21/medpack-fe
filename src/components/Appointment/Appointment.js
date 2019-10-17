@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Paper, Typography, withStyles } from "@material-ui/core";
+import EditAppointment from "../EditAppointment/EditAppointment";
 
 const styles = theme => ({
   root: {
@@ -13,10 +14,17 @@ const styles = theme => ({
 class Appointment extends Component {
   constructor() {
     super();
+    this.state = {
+      open: false
+    };
   }
 
+  handleDialog = open => {
+    this.setState({ open });
+  };
+
   render() {
-    console.log(this.props.patient_id);
+    console.log(this.props);
     const { patient_id, office_id, start, classes } = this.props;
     return (
       <Paper className={classes.root}>
@@ -30,6 +38,11 @@ class Appointment extends Component {
         <Button variant="contained" color="primary" className={classes.content}>
           Add Scan Results
         </Button>
+        <EditAppointment
+          patient_id={patient_id}
+          start={start}
+          office_id={office_id}
+        />
       </Paper>
     );
   }
