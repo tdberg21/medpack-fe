@@ -42,7 +42,8 @@ const styles = theme => ({
     marginTop: 7
   },
   title: {
-    textAlign: "left"
+    textAlign: "left",
+    marginBottom: theme.spacing.unit * 2
   }
 });
 

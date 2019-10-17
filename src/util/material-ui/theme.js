@@ -1,31 +1,31 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme } from "@material-ui/core";
 
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
       root: {
-        height: 88,
-      },
+        height: 88
+      }
     },
     MuiButton: {
       label: {
-        textTransform: 'none',
-      },
+        textTransform: "none"
+      }
     },
     MuiListItemIcon: {
       root: {
-        color: 'inherit',
-      },
-    },
+        color: "inherit"
+      }
+    }
   },
   palette: {
     primary: {
-      main: '#1f6a53',
+      main: "#1f6a53"
     },
     secondary: {
-      main: '#6a1f50',
-    },
-  },
+      main: "#ff3333"
+    }
+  }
 });
 
 export default theme;

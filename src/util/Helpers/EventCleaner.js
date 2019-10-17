@@ -15,9 +15,7 @@ export default events => {
       id,
       office_id,
       patient_id,
-      url: `http://localhost:3000/app/appointment/${editTimes(
-        time_slot.attributes.start_time
-      )}`,
+      url: `http://localhost:3000/app/appointment/${id}`,
       start,
       end
     };

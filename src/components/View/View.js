@@ -37,10 +37,10 @@ const View = ({ classes, events }) => {
           render={({ match }) => {
             const { id } = match.params;
             const matchingEvent = events.find(event => {
-              return event.start === id;
+              return event.id === id;
             });
             console.log(matchingEvent);
-            return <Appointment {...matchingEvent} />;
+            return <Appointment event={matchingEvent} />;
           }}
         />
         <Redirect to="/" />

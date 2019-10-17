@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import {
   Button,
+  Divider,
   Dialog,
+  DialogActions,
   DialogTitle,
   DialogContent,
+  OutlinedInput,
+  MenuItem,
   TextField,
   Typography,
   withStyles
@@ -11,18 +15,25 @@ import {
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { updateAppointment } from "../../util/ApiCalls";
+import { updateEvent } from "../../util/Actions/events/events";
 
 const styles = theme => ({
   root: {},
+  actions: {
+    padding: theme.spacing.unit * 2
+  },
   dialog: {
-    // height: 300,
-    // width: 400
+    // width: 350
+  },
+  dialogButton: {
+    width: 200
   },
   content: {
-    margin: "15px 0"
+    width: 350,
+    padding: "0 24px"
   },
   textField: {
-    margin: theme.spacing.unit * 2
+    // margin: theme.spacing.unit * 2
   }
 });
 
@@ -31,14 +42,18 @@ class EditAppointment extends Component {
     super();
     this.state = {
       open: false,
+      date: "",
       start: "",
-      patient_id: ""
+      end: "",
+      patient_id: "",
+      appointment_result: ""
     };
   }
 
   componentDidMount() {
-    const { start, patient_id } = this.props;
-    this.setState({ start, patient_id });
+    const { patient_id, appointment_result } = this.props.event;
+    this.setState({ patient_id, appointment_result });
+    this.addDateToState();
   }
 
   handleDialog = open => () => {
@@ -55,23 +70,45 @@ class EditAppointment extends Component {
   };
 
   handleSubmit = async () => {
-    // const stateKeys = ["start", "patient_id"];
-    // stateKeys.reduce( (acc, key) => {
-    //   if(this.state)
-    // }, {});
-    const { id, user } = this.props;
-    const formData = {
-      appointment: {
-        patient_id: this.state.patient_id
+    const stateKeys = ["start", "patient_id"];
+    const appointmentChanges = stateKeys.reduce((acc, key) => {
+      if (this.state[key] !== this.props.event[key]) {
+        Object.assign(acc, { [key]: this.state[key] });
       }
+      return acc;
+    }, {});
+    const { id } = this.props.event;
+    const { user } = this.props;
+    const formData = {
+      appointment: appointmentChanges
     };
-    console.log(formData);
-    updateAppointment(user.auth_token, formData, id);
+    if (Object.keys(appointmentChanges).length) {
+      await updateAppointment(user.auth_token, formData, id);
+      this.updateEventState(appointmentChanges);
+    }
+    this.handleDialog(false)();
+  };
+
+  updateEventState = changes => {
+    const { event } = this.props;
+    const updatedEvent = Object.assign(event, changes);
+    console.log(updatedEvent);
+    this.props.updateEvent(event.id, updatedEvent);
+  };
+
+  addDateToState = () => {
+    const { start, end } = this.props.event;
+    const dateTime = {
+      date: start.split("T")[0],
+      start: start.split("T")[1],
+      end: end.split("T")[1]
+    };
+    this.setState(dateTime);
   };
 
   render() {
     const { classes } = this.props;
-    const { start, patient_id } = this.state;
+    const { start, patient_id, date, end, appointment_result } = this.state;
 
     return (
       <div className={classes.root}>
@@ -79,6 +116,7 @@ class EditAppointment extends Component {
           variant="contained"
           color="primary"
           onClick={this.handleDialog(true)}
+          className={classes.dialogButton}
         >
           Edit Appointment
         </Button>
@@ -90,7 +128,20 @@ class EditAppointment extends Component {
           <DialogTitle>
             <Typography variant="h5">Edit Appointment</Typography>
           </DialogTitle>
+          {/* <Divider /> */}
           <DialogContent className={classes.content}>
+            <TextField
+              className={classes.textField}
+              color="primary"
+              variant="outlined"
+              type="date"
+              value={date}
+              name="date"
+              label="Date"
+              onChange={this.handleChange}
+              fullWidth
+              margin="normal"
+            />
             <TextField
               className={classes.textField}
               color="primary"
@@ -100,6 +151,20 @@ class EditAppointment extends Component {
               label="Start Time"
               name="start"
               onChange={this.handleChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              className={classes.textField}
+              color="primary"
+              variant="outlined"
+              type="text"
+              value={end}
+              label="End Time"
+              name="end"
+              onChange={this.handleChange}
+              fullWidth
+              margin="normal"
             />
             <TextField
               className={classes.textField}
@@ -110,7 +175,37 @@ class EditAppointment extends Component {
               label="Patient Id"
               name="patient_id"
               onChange={this.handleChange}
+              fullWidth
+              margin="normal"
             />
+            <TextField
+              select
+              className={classes.select}
+              onChange={this.handleChange}
+              name="appointment_result"
+              value={appointment_result}
+              variant="outlined"
+              input={<OutlinedInput name="appointment_result" />}
+              label="Status"
+              fullWidth
+              margin="normal"
+            >
+              <MenuItem value="pending">Pending</MenuItem>
+              <MenuItem value="scheduled">Scheduled</MenuItem>
+              <MenuItem value="missed">Missed</MenuItem>
+              <MenuItem value="rescheduled">Rescheduled</MenuItem>
+              <MenuItem value="canceled">Canceled</MenuItem>
+              <MenuItem value="attended">Attended</MenuItem>
+            </TextField>
+          </DialogContent>
+          <DialogActions className={classes.actions}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={this.handleDialog(false)}
+            >
+              Cancel
+            </Button>
             <Button
               variant="contained"
               color="primary"
@@ -118,14 +213,7 @@ class EditAppointment extends Component {
             >
               Submit Changes
             </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={this.handleDialog(false)}
-            >
-              Cancel
-            </Button>
-          </DialogContent>
+          </DialogActions>
         </Dialog>
       </div>
     );
@@ -136,7 +224,14 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
+const mapDispatchToProps = dispatch => ({
+  updateEvent: (id, changedEvent) => dispatch(updateEvent(id, changedEvent))
+});
+
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(EditAppointment);

@@ -45,7 +45,7 @@ class Calendar extends Component {
         eventClick={function(info) {
           // info.jsEvent.preventDefault();
           info.jsEvent.preventDefault();
-          window.open(info.event.url);
+          window.open(info.event.url, "_self");
         }}
       />
     );
