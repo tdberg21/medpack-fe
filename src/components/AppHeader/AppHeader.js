@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   AppBar,
   InputBase,
+  MenuItem,
   Toolbar,
   Typography,
   withStyles
@@ -65,43 +66,78 @@ const styles = theme => ({
   }
 });
 
-const AppHeader = ({ classes }) => {
-  const handleChange = id => {
-    this.props.patients.filter(patient => patient === id);
+class AppHeader extends Component {
+  constructor() {
+    super();
+    this.state = {
+      search: "",
+      suggestions: false
+    };
+  }
+
+  handleChange = e => {
+    const { value } = e.target;
+    this.setState({ search: value });
+    if (value.length) {
+      this.setState({ suggestions: true });
+    }
   };
 
-  return (
-    <>
-      <div className={classes.filler} />
-      <AppBar position="fixed" className={classes.root}>
-        <Toolbar className={classes.toolBar}>
-          <Typography
-            className={classes.title}
-            variant="h6"
-            color="inherit"
-            noWrap
-          >
-            <img src={logo} alt="logo" height="50"></img>
-            {/* Provider Minder */}
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+  renderSuggestions = () => {
+    const suggestions = this.props.patients.filter(
+      patient => patient.id === this.state.search
+    );
+    console.log(this.props);
+    return suggestions.map(patient => {
+      console.log(patient);
+      const { id } = patient;
+      return (
+        <MenuItem key={id} component="div">
+          {id}
+        </MenuItem>
+      );
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <>
+        <div className={classes.filler} />
+        <AppBar position="fixed" className={classes.root}>
+          <Toolbar className={classes.toolBar}>
+            <Typography
+              className={classes.title}
+              variant="h6"
+              color="inherit"
+              noWrap
+            >
+              <img src={logo} alt="logo" height="50"></img>
+              {/* Provider Minder */}
+            </Typography>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search..."
+                onChange={this.handleChange}
+                value={this.state.search}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
+              {this.state.suggestions && this.renderSuggestions()}
             </div>
-            <InputBase
-              placeholder="Search..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-};
+          </Toolbar>
+        </AppBar>
+      </>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   patients: state.patients

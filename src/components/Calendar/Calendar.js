@@ -32,8 +32,7 @@ class Calendar extends Component {
 
   addPatientsToStore = async (authToken, officeId) => {
     const response = await getPatients(authToken, officeId);
-    console.log(response);
-    // this.props.addPatients(response);
+    this.props.addPatients(response.data);
   };
 
   render() {
