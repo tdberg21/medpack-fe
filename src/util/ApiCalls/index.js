@@ -115,10 +115,11 @@ export const updateAppointment = async (token, formData) => {
       {
         method: "PATCH",
         body: JSON.stringify(formData),
-        headers: headerInfoWithAuth
+        headers: headerInfoWithAuth(token)
       }
     );
     const message = await response.json();
+    console.log(message);
     return message;
   } catch (error) {
     throw error;
