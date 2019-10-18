@@ -42,18 +42,29 @@ class EditAppointment extends Component {
     super();
     this.state = {
       open: false,
-      date: "",
-      start: "",
-      end: "",
+      start_date: "",
+      start_time: "",
+      end_time: "",
       patient_id: "",
       appointment_result: ""
     };
   }
 
   componentDidMount() {
-    const { patient_id, appointment_result } = this.props.event;
-    this.setState({ patient_id, appointment_result });
-    this.addDateToState();
+    const {
+      patient_id,
+      appointment_result,
+      start_date,
+      start_time,
+      end_time
+    } = this.props.event;
+    this.setState({
+      patient_id,
+      appointment_result,
+      start_date,
+      start_time,
+      end_time
+    });
   }
 
   handleDialog = open => () => {
@@ -70,7 +81,13 @@ class EditAppointment extends Component {
   };
 
   handleSubmit = async () => {
-    const stateKeys = ["start", "patient_id"];
+    const stateKeys = [
+      "start_time",
+      "patient_id",
+      "appointment_result",
+      "start_date",
+      "end_time"
+    ];
     const appointmentChanges = stateKeys.reduce((acc, key) => {
       if (this.state[key] !== this.props.event[key]) {
         Object.assign(acc, { [key]: this.state[key] });
@@ -82,6 +99,7 @@ class EditAppointment extends Component {
     const formData = {
       appointment: appointmentChanges
     };
+    console.log(appointmentChanges);
     if (Object.keys(appointmentChanges).length) {
       await updateAppointment(user.auth_token, formData, id);
       this.updateEventState(appointmentChanges);
@@ -92,23 +110,18 @@ class EditAppointment extends Component {
   updateEventState = changes => {
     const { event } = this.props;
     const updatedEvent = Object.assign(event, changes);
-    console.log(updatedEvent);
     this.props.updateEvent(event.id, updatedEvent);
-  };
-
-  addDateToState = () => {
-    const { start, end } = this.props.event;
-    const dateTime = {
-      date: start.split("T")[0],
-      start: start.split("T")[1],
-      end: end.split("T")[1]
-    };
-    this.setState(dateTime);
   };
 
   render() {
     const { classes } = this.props;
-    const { start, patient_id, date, end, appointment_result } = this.state;
+    const {
+      start_time,
+      patient_id,
+      start_date,
+      end_time,
+      appointment_result
+    } = this.state;
 
     return (
       <div className={classes.root}>
@@ -128,15 +141,14 @@ class EditAppointment extends Component {
           <DialogTitle>
             <Typography variant="h5">Edit Appointment</Typography>
           </DialogTitle>
-          {/* <Divider /> */}
           <DialogContent className={classes.content}>
             <TextField
               className={classes.textField}
               color="primary"
               variant="outlined"
               type="date"
-              value={date}
-              name="date"
+              value={start_date}
+              name="start_date"
               label="Date"
               onChange={this.handleChange}
               fullWidth
@@ -147,9 +159,9 @@ class EditAppointment extends Component {
               color="primary"
               variant="outlined"
               type="text"
-              value={start}
+              value={start_time}
               label="Start Time"
-              name="start"
+              name="start_time"
               onChange={this.handleChange}
               fullWidth
               margin="normal"
@@ -159,9 +171,9 @@ class EditAppointment extends Component {
               color="primary"
               variant="outlined"
               type="text"
-              value={end}
+              value={end_time}
               label="End Time"
-              name="end"
+              name="end_time"
               onChange={this.handleChange}
               fullWidth
               margin="normal"
