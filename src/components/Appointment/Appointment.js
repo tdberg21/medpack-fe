@@ -51,31 +51,15 @@ class Appointment extends Component {
     this.setState({ open });
   };
 
-  renderDateTime = () => {
-    const { classes, event } = this.props;
-    const { start, end } = event;
-    const dateTime = {
-      date: start.split("T")[0],
-      start: start.split("T")[1],
-      end: end.split("T")[1]
-    };
-    return (
-      <>
-        <TableCell className={classes.content}>{dateTime.date}</TableCell>
-        <TableCell className={classes.content}>{dateTime.start}</TableCell>
-        <TableCell className={classes.content}>{dateTime.end}</TableCell>
-      </>
-    );
-  };
-
   render() {
     console.log(this.props.event);
     const {
       patient_id,
       office_id,
       id,
-      start,
-      end,
+      start_date,
+      start_time,
+      end_time,
       appointment_result
     } = this.props.event;
     const { classes } = this.props;
@@ -105,15 +89,15 @@ class Appointment extends Component {
                 <TableCell>Date</TableCell>
                 <TableCell>Start Time</TableCell>
                 <TableCell>End Time</TableCell>
-                {/* <TableCell>Office Id</TableCell> */}
                 <TableCell>Patient Id</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                {this.renderDateTime()}
-                {/* <TableCell>{office_id}</TableCell> */}
+                <TableCell>{start_date}</TableCell>
+                <TableCell>{start_time}</TableCell>
+                <TableCell>{end_time}</TableCell>
                 <TableCell>{patient_id}</TableCell>
                 <TableCell>{appointment_result}</TableCell>
               </TableRow>

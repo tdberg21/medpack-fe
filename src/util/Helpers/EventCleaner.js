@@ -7,8 +7,8 @@ export default events => {
       patient_id,
       time_slot
     } = event.attributes;
-    const start = editTimes(time_slot.attributes.start_time);
-    const end = editTimes(time_slot.attributes.end_time);
+
+    const { start_time, start_date, end_time } = time_slot.attributes;
 
     return {
       appointment_result,
@@ -16,14 +16,9 @@ export default events => {
       office_id,
       patient_id,
       url: `http://localhost:3000/app/appointment/${id}`,
-      start,
-      end
+      start_date,
+      start_time,
+      end_time
     };
   });
-};
-
-const editTimes = time => {
-  const timeArray = time.split(" ");
-  timeArray.pop();
-  return timeArray.join("T");
 };

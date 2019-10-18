@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import addEvents from "../../util/Actions";
 import { withRouter } from "react-router-dom";
 import eventCleaner from "../../util/Helpers/EventCleaner";
+import calendarCleaner from "../../util/Helpers/CalendarCleaner";
 import FullCalendar from "@fullcalendar/react";
 import { getAppointments, getPatients } from "../../util/ApiCalls";
 import { userLogin } from "../../util/Actions";
@@ -15,7 +16,9 @@ import "./Calendar.scss";
 class Calendar extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      appointments: []
+    };
   }
 
   async componentDidMount() {
@@ -23,8 +26,15 @@ class Calendar extends Component {
     await this.addPatientsToStore(auth_token, office_id);
     if (!this.props.events.length) {
       const response = await getAppointments(office_id, auth_token);
+      console.log(response);
       const cleanedEvents = eventCleaner(response);
+      const appointments = calendarCleaner(cleanedEvents);
+      console.log(appointments);
+      this.setState({ appointments });
       await this.props.addEvents(cleanedEvents);
+    } else {
+      const appointments = calendarCleaner(this.props.events);
+      this.setState({ appointments });
     }
   }
 
@@ -38,12 +48,11 @@ class Calendar extends Component {
       <FullCalendar
         defaultView="timeGridWeek"
         plugins={[timeGridPlugin]}
-        events={this.props.events}
+        events={this.state.appointments}
         weekends={false}
         minTime="07:00:00"
         maxTime="22:00:00"
         eventClick={function(info) {
-          // info.jsEvent.preventDefault();
           info.jsEvent.preventDefault();
           window.open(info.event.url, "_self");
         }}
