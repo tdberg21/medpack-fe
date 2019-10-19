@@ -13,7 +13,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import CalendarIcon from "@material-ui/icons/Event";
 import AppointmentIcon from "@material-ui/icons/Assignment";
 import PatientsIcon from "@material-ui/icons/AssignmentInd";
-import ScreeningIcon from "@material-ui/icons/Assessment";
 import MakeAppointmentIcon from "@material-ui/icons/SupervisedUserCircle";
 import MakePatientIcon from "@material-ui/icons/AccountCircle";
 import AdminIcon from "@material-ui/icons/VerifiedUser";
@@ -72,11 +71,6 @@ const LeftDrawer = ({ classes, user }) => {
         text: "Patients",
         route: "/patients",
         icon: <PatientsIcon key="icon" />
-      },
-      {
-        text: "Screening Results",
-        route: "/screeningResults",
-        icon: <ScreeningIcon key="icon" />
       },
       {
         text: "Add Appointment",
