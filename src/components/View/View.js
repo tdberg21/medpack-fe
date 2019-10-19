@@ -5,8 +5,8 @@ import { withStyles } from "@material-ui/core";
 import { compose } from "recompose";
 import {
   Appointment,
+  Appointments,
   Patients,
-  // PatientDetails,
   UserInterface,
   Calendar
 } from "..";
@@ -31,6 +31,7 @@ const View = ({ classes, events }) => {
         <Route exact path="/app" component={Calendar} />
         <Route path="/app/patients" component={Patients} />
         <Route path="/app/addAppointment" component={CreateAppointment} />
+        <Route path="/app/appointments" component={Appointments} />
         <Route path="/app/addPatient" component={CreatePatient} />
         <Route
           path="/app/appointment/:id"

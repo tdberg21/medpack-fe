@@ -1,5 +1,6 @@
 import AppHeader from "./AppHeader/AppHeader";
 import Appointment from "./Appointment/Appointment";
+import Appointments from "./Appointments/Appointments";
 import LeftDrawer from "./LeftDrawer/LeftDrawer";
 import Calendar from "./Calendar/Calendar";
 import Patients from "./Patients/Patients";
@@ -11,6 +12,7 @@ import Success from "./Success/Success";
 export {
   AppHeader,
   Appointment,
+  Appointments,
   LeftDrawer,
   Calendar,
   Patients,
