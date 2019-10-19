@@ -66,8 +66,7 @@ class Appointment extends Component {
     return (
       <>
         <Typography variant="h4" className={classes.title}>
-          {" "}
-          Appointment Details{" "}
+          Appointment Details
         </Typography>
         <Paper className={classes.root}>
           <div className={classes.topContainer}>
