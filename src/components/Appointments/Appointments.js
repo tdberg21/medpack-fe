@@ -55,7 +55,7 @@ class Appointments extends Component {
 
   renderAppointments = () => {
     return this.state.sortedEvents[this.state.value].map(event => {
-      const { id, patient_id, start_date, start_time, end_time, url } = event;
+      const { id, patient_id, start_date, start_time, end_time } = event;
       return (
         <TableRow>
           <TableCell>{id}</TableCell>
@@ -76,7 +76,7 @@ class Appointments extends Component {
   renderMessage = () => {
     return (
       <Typography>
-        `There are currently no {this.state.value} appointments`
+        There are currently no {this.state.value} appointments
       </Typography>
     );
   };

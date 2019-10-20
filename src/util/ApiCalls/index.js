@@ -124,3 +124,19 @@ export const updateAppointment = async (token, formData, id) => {
     throw error;
   }
 };
+
+export const getPatientsAppointments = async (token, id) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/v1/appointments?patient_id=${id}`,
+      {
+        method: "GET",
+        headers: headerInfoWithAuth(token)
+      }
+    );
+    const appointments = await response.json();
+    return appointments;
+  } catch (error) {
+    throw error;
+  }
+};
